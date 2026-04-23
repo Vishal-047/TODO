@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pulse Tasks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              heading: ["Space Grotesk", "sans-serif"],
+              body: ["Plus Jakarta Sans", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+    />
+  </head>
+  <body class="min-h-screen bg-slate-950 text-slate-100 font-body selection:bg-cyan-300 selection:text-slate-900">
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+      <div class="absolute -top-28 -left-16 h-80 w-80 rounded-full bg-cyan-400/25 blur-3xl"></div>
+      <div class="absolute top-1/3 -right-24 h-96 w-96 rounded-full bg-fuchsia-500/25 blur-3xl"></div>
+      <div class="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-emerald-400/20 blur-3xl"></div>
+    </div>
+
+    <main class="mx-auto flex min-h-screen w-full max-w-4xl items-center px-4 py-8 sm:px-6 lg:px-8">
+      <div class="w-full rounded-3xl border border-white/15 bg-white/10 p-4 shadow-2xl backdrop-blur-xl sm:p-8">
+        <div class="mb-8 flex flex-col gap-2">
+          <p class="text-cyan-300/90 text-xs tracking-[0.25em] uppercase font-semibold">Smart Daily Flow</p>
+          <h1 class="font-heading text-3xl font-bold leading-tight sm:text-5xl">Pulse Tasks</h1>
+          <p class="max-w-2xl text-sm text-slate-300 sm:text-base">
+            Focused task management with fast auth and one-tap completion.
+          </p>
+        </div>
+
+        <section id="authSection" class="grid gap-6 md:grid-cols-2">
+          <article class="rounded-2xl border border-white/10 bg-slate-900/60 p-5">
+            <h2 class="font-heading text-xl font-semibold">Get Started</h2>
+            <p class="mt-2 text-sm text-slate-300">
+              Sign in to continue, or create a new account in seconds.
+            </p>
+          </article>
+
+          <article class="rounded-2xl border border-white/10 bg-slate-900/60 p-5">
+            <div class="mb-5 grid grid-cols-2 rounded-xl border border-white/10 bg-slate-800/70 p-1">
+              <button
+                class="tab-btn active rounded-lg px-3 py-2 text-sm font-semibold transition"
+                id="loginTab"
+                type="button"
+              >
+                Login
+              </button>
+              <button
+                class="tab-btn rounded-lg px-3 py-2 text-sm font-semibold transition"
+                id="registerTab"
+                type="button"
+              >
+                Register
+              </button>
+            </div>
+
+            <form id="loginForm" class="space-y-4">
+              <div class="space-y-1.5">
+                <label class="text-xs uppercase tracking-wide text-slate-400">Email</label>
+                <input
+                title="email"
+                  class="w-full rounded-xl border border-white/15 bg-slate-950/60 px-4 py-3 text-sm outline-none transition focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/30"
+                  type="email"
+                  id="loginEmail"
+                  required
+                />
+              </div>
+
+              <div class="space-y-1.5">
+                <label class="text-xs uppercase tracking-wide text-slate-400">Password</label>
+                <input
+                  title="password"
+                  class="w-full rounded-xl border border-white/15 bg-slate-950/60 px-4 py-3 text-sm outline-none transition focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/30"
+                  type="password"
+                  id="loginPassword"
+                  required
+                />
+              </div>
+
+              <button
+                class="w-full rounded-xl bg-cyan-300 px-4 py-3 text-sm font-bold text-slate-900 transition hover:bg-cyan-200"
+                type="submit"
+              >
+                Login
+              </button>
+            </form>
+
+            <form id="registerForm" class="hidden space-y-4">
+              <div class="space-y-1.5">
+                <label class="text-xs uppercase tracking-wide text-slate-400">Name</label>
+                <input
+                  title="name"
+                  class="w-full rounded-xl border border-white/15 bg-slate-950/60 px-4 py-3 text-sm outline-none transition focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/30"
+                  type="text"
+                  id="registerName"
+                  required
+                />
+              </div>
+
+              <div class="space-y-1.5">
+                <label class="text-xs uppercase tracking-wide text-slate-400">Email</label>
+                <input
+                  title="email"
+                  class="w-full rounded-xl border border-white/15 bg-slate-950/60 px-4 py-3 text-sm outline-none transition focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/30"
+                  type="email"
+                  id="registerEmail"
+                  required
+                />
+              </div>
+
+              <div class="space-y-1.5">
+                <label class="text-xs uppercase tracking-wide text-slate-400">Password</label>
+                <input
+                  title="password"
+                  class="w-full rounded-xl border border-white/15 bg-slate-950/60 px-4 py-3 text-sm outline-none transition focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/30"
+                  type="password"
+                  id="registerPassword"
+                  required
+                />
+              </div>
+
+              <button
+                class="w-full rounded-xl bg-fuchsia-400 px-4 py-3 text-sm font-bold text-slate-900 transition hover:bg-fuchsia-300"
+                type="submit"
+              >
+                Create Account
+              </button>
+            </form>
+          </article>
+        </section>
+
+        <section id="todoSection" class="hidden space-y-6">
+          <header class="flex flex-col gap-4 rounded-2xl border border-white/10 bg-slate-900/60 p-5 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 class="font-heading text-2xl font-semibold">Your Mission List</h2>
+              <p class="mt-1 text-sm text-slate-300">Add, complete, and clear tasks quickly.</p>
+            </div>
+            <button
+              id="logoutBtn"
+              class="rounded-xl border border-rose-200/50 bg-rose-400/90 px-4 py-2 text-sm font-semibold text-rose-950 transition hover:bg-rose-300"
+              type="button"
+            >
+              Logout
+            </button>
+          </header>
+
+          <form id="todoForm" class="flex flex-col gap-3 sm:flex-row">
+            <input
+              class="w-full rounded-xl border border-white/15 bg-slate-900/70 px-4 py-3 text-sm outline-none transition focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/30"
+              type="text"
+              id="todoInput"
+              placeholder="Add a new task..."
+              required
+            />
+            <button
+              class="rounded-xl bg-emerald-300 px-5 py-3 text-sm font-bold text-emerald-950 transition hover:bg-emerald-200 sm:min-w-32"
+              type="submit"
+            >
+              Add Task
+            </button>
+          </form>
+
+          <ul id="todoList" class="space-y-3"></ul>
+        </section>
+
+        <p id="message" class="mt-5 min-h-6 text-sm text-slate-300" role="status" aria-live="polite"></p>
+      </div>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
