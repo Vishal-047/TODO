@@ -1,29 +1,33 @@
-const express=require("express");
-const mongoose=require("mongoose");
-const path=require("path");
+const express = require("express");
+const mongoose = require("mongoose");
+const path = require("path");
 require("dotenv").config();
 
-const authRoute=require("./routes/auth");
-const todoRoute=require("./routes/todo");
-const app=express();
+const authRoute = require("./routes/auth");
+const todoRoute = require("./routes/todo");
+
+const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
-
-mongoose.connect(process.env.MONGO_URI)
-.then(()=>console.log("Database connected"))
-.catch((err)=>console.log(err));
+let isConnected = false;
+async function connectDB() {
+  if (isConnected) return;
+  await mongoose.connect(process.env.MONGO_URI);
+  isConnected = true;
+  console.log("Database connected");
+}
+connectDB().catch((err) => console.error("DB connection error:", err));
 
 app.use("/auth", authRoute);
 app.use("/todos", todoRoute);
 
-app.use((req,res)=>{
-    res.status(404).json({
-        message:"Routes not found",
-    });
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
 });
 
-const PORT=process.env.PORT || 3000
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => console.log("Server started at port:", PORT));
+}
 
-app.listen(PORT, ()=>{
-    console.log("server started at port: ",PORT);
-});
+module.exports = app;
